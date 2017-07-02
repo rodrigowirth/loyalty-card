@@ -1,0 +1,25 @@
+mysql: &MYSQL
+  image: mysql:8.0.1
+  ports:
+    - '3306:3306'
+  environment:
+    MYSQL_ROOT_PASSWORD: loyalty
+    MYSQL_USER: loyalty
+    MYSQL_PASSWORD: loyalty
+    MYSQL_DATABASE: loyalty
+
+local: &LOCAL
+  image: node:8.1.2-onbuild
+  command: npm run dev
+  volumes:
+    - .:/usr/src/app
+  ports:
+    - 3000
+  environment:
+    NODE_ENV: develop
+    VIRTUAL_HOST: loyalty-card.local.bravi.com.br
+    VIRTUAL_PORT: 3000
+    DB_PORT: tcp://172.17.0.4:3306
+    DB_USER: loyalty
+    DB_PASSWORD: loyalty
+    DB_DATABASE: loyalty
