@@ -1,11 +1,7 @@
 export function up (knex) {
   return knex
     .schema
-
-    .dropTable('stamps')
-    .dropTable('companies')
-    .dropTable('people')
-
+    
     .createTable('people', (table) => {
       table.increments('id').primary();
       table.string('guid').unique();
