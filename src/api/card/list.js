@@ -7,16 +7,6 @@ export default async (req, res) => {
     throw new BadRequestError('Missing guid param');
   }
 
-  // const result = await req.knex('stamps')
-  //   .leftJoin('people', 'stamps.personId', 'people.id')
-  //   .where({ guid })
-  //   .groupBy('companyId')
-  //   .select('companyId')
-  //   .count('stamps.id as count');
-
-  // console.log('result ==> ', result);
-  //  [ { companyId: 1, count: 12 }, { companyId: 10, count: 3 } ]
-
   const person = await req.knex('people')
     .where({ guid })
     .first();
@@ -62,16 +52,3 @@ export default async (req, res) => {
 
   res.status(200).send(list);
 };
-
-const companies = { };
-async function fetchCompany(knex, id) {
-  if (!companies[id]) {
-    companies[id] = await knex('companies')
-      .where({ id })
-      .first();
-
-    console.log('fetch company from db');
-  }
-
-  return companies[id];
-}
