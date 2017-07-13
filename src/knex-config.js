@@ -4,8 +4,6 @@ import config from './config';
 
 const { db } = config.env;
 
-console.log('dirname ==> ', __dirname);
-
 export default {
   client: 'mysql',
   connection: {
@@ -18,9 +16,9 @@ export default {
     database: db.database,
   },
   migrations: {
-    directory: path.join(__dirname, '/db/migrations'),
+    directory: path.join(__dirname, '/../db/migrations'),
   },
   seeds: {
-    directory: path.join(__dirname, '/db/seeds'),
+    directory: path.join(__dirname, '/../db/seeds'),
   },
 };
